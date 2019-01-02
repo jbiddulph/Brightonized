@@ -1,0 +1,10 @@
+page-login .logo {
+  font-size: 25vh;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+page-login h1, page-login h6 {
+  color: #ffffff;
+  font-size: 1em;
+}
