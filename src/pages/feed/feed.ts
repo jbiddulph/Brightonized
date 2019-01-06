@@ -252,7 +252,7 @@ export class FeedPage {
   }
 
   openModal() {
-    const mapModal = this.modal.create('MapPage', { data: this.post });
+    const mapModal = this.modal.create('MapPage', { data: this.post.name });
     mapModal.present();
   }
 }
