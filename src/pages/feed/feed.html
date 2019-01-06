@@ -1,8 +1,8 @@
 <ion-header>
 
   <ion-navbar color="danger">
-    <ion-buttons>
-      <button ion-button (click)="doClick()">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
@@ -19,13 +19,22 @@
 
 <ion-content>
   <ion-row margin class="rowStyle">
-    <button ion-button icon-only color="danger" clear>
+    <button ion-button icon-only color="danger" clear (click)="addPhoto()">
       <ion-icon name="images"></ion-icon>
     </button>
+    <button ion-button icon-only color="danger" clear (click)="addPhotoFromCam()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
     <ion-input type="text" placeholder="Say something..." [(ngModel)]="text"></ion-input>
     <button ion-button icon-only color="danger" clear (click)="post()">
       <ion-icon name="send"></ion-icon>
     </button>
+  </ion-row>
+
+  <ion-row margin class="rowStyle" *ngIf="image">
+    <ion-card class="round-corners">
+      <img [src]="image" class="round-corners" alt="">
+    </ion-card>
   </ion-row>
 
   <ion-refresher (ionRefresh)="refresh($event)">
@@ -34,14 +43,17 @@
 
   <ion-card *ngFor="let post of posts">
     <ion-item-divider color="danger">
-      {{post.data().owner_name}} Says
+      {{post.data().owner_name}} says
     </ion-item-divider>
     <ion-item text-wrap>
       {{post.data().text}}
     </ion-item>
+
+    <img [src]="post.data().image" alt="" *ngIf="post.data().image" (click)="openModal()">
+    <google-map></google-map>
     <ion-row class="bottom-bar">
       <ion-col>
-        <button ion-button block icon-left clear small color="danger" class="border-right">
+        <button ion-button block icon-left clear small color="danger" class="border-right" (click)="like(post)">
           <ion-icon name="thumbs-up"></ion-icon>
           <small>12 likes</small>
         </button>
