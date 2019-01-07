@@ -49,7 +49,7 @@
       {{post.data().text}}
     </ion-item>
 
-    <img [src]="post.data().image" alt="" *ngIf="post.data().image" (click)="openModal()">
+    <img [src]="post.data().image" alt="" *ngIf="post.data().image" (click)="openModal(post)">
     <google-map></google-map>
     <ion-row class="bottom-bar">
       <ion-col>

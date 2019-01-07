@@ -19,8 +19,8 @@ export class MapPage {
   }
 
   ionViewWillLoad() {
-    const data = this.navParams.get('data');
-    console.log(data);
+    const moredata = this.navParams.get('data');
+    console.log('here we go: '+moredata);
   }
   closeModal() {
     this.view.dismiss();

@@ -23,6 +23,7 @@ export class FeedPage {
   image: string;
   latitude: number;
   longitude: number;
+  myData: any = {};
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -243,16 +244,33 @@ export class FeedPage {
       action: post.data().likes && post.data().likes[firebase.auth().currentUser.uid] == true ? "unlike" : "like"
     }
     this.http.post("https://us-central1-quotes-cc05d.cloudfunctions.net/updateLikesCount", JSON.stringify(body), {
-      responseType: "text"
+      responseType: 'text'
     }).subscribe((data) => {
-      console.log(data)
+      console.log("here is the data: "+ data)
     }, (error) => {
-      console.log(error)
+      console.log("here is the error: "+ error)
     })
   }
 
-  openModal() {
-    const mapModal = this.modal.create('MapPage', { data: this.post.name });
-    mapModal.present();
+  openModal(post) {
+    
+    var docRef = firebase.firestore().collection("posts").doc(post.id)
+    docRef.get().then(function(doc) {
+      if (doc.exists) {
+          console.log("Document data:", doc.data())
+          const myData = doc.data()
+          console.log("My data:", myData)
+          
+      } else {
+          console.log("No such document!");
+      }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+
+    console.log("myData is now undefined", this.myData);
+
+    const mapModal = this.modal.create('MapPage', { data: this.myData });
+          mapModal.present();
   }
 }
