@@ -6,7 +6,7 @@ admin.initializeApp(functions.config().firebase);
 // // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
 
-export const updateLikesCount = functions.https.onRequest((request, response) => {
+export const updateTheLikesCount = functions.https.onRequest((request, response) => {
     
     console.log(request.body);
 
@@ -17,11 +17,11 @@ export const updateLikesCount = functions.https.onRequest((request, response) =>
     admin.firestore().collection("posts").doc(postId).get().then((data) => {
         
         let likesCount = data.data().likesCount || 0;
-        let likes = data.data().likes || [];
+        const likes = data.data().likes || [];
 
-        let updateData = {};
+        const updateData = {};
 
-        if(action == "like") {
+        if(action === "like") {
             updateData["likesCount"] = ++likesCount;
             updateData[`likes.${userId}`] = true;
         } else {

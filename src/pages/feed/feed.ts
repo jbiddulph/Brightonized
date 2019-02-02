@@ -7,7 +7,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { HttpClient } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
-declare var google;
+
 @Component({
   selector: 'page-feed',
   templateUrl: 'feed.html',
@@ -24,6 +24,7 @@ export class FeedPage {
   latitude: number;
   longitude: number;
   myData: any = {};
+  coords: any = {};
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -243,7 +244,7 @@ export class FeedPage {
       userId: firebase.auth().currentUser.uid,
       action: post.data().likes && post.data().likes[firebase.auth().currentUser.uid] == true ? "unlike" : "like"
     }
-    this.http.post("https://us-central1-quotes-cc05d.cloudfunctions.net/updateLikesCount", JSON.stringify(body), {
+    this.http.post("https://us-central1-quotes-cc05d.cloudfunctions.net/updateTheLikesCount", JSON.stringify(body), {
       responseType: 'text'
     }).subscribe((data) => {
       console.log("here is the data: "+ data)
@@ -254,23 +255,22 @@ export class FeedPage {
 
   openModal(post) {
     
+    
+    
     var docRef = firebase.firestore().collection("posts").doc(post.id)
-    docRef.get().then(function(doc) {
+    docRef.get().then((doc) => {
       if (doc.exists) {
           console.log("Document data:", doc.data())
           const myData = doc.data()
           console.log("My data:", myData)
-          
+          this.coords = [ myData ]
+          const mapModal = this.modal.create('MapPage', { data: this.coords });
+          mapModal.present();
       } else {
           console.log("No such document!");
       }
     }).catch(function(error) {
         console.log("Error getting document:", error);
-    });
-
-    console.log("myData is now undefined", this.myData);
-
-    const mapModal = this.modal.create('MapPage', { data: this.myData });
-          mapModal.present();
+    });      
   }
 }

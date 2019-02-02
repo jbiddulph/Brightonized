@@ -14,13 +14,19 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
   templateUrl: 'map.html',
 })
 export class MapPage {
+  
+  
+  items = [];
+  
 
   constructor(public navParams: NavParams, private view: ViewController) {
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     const moredata = this.navParams.get('data');
-    console.log('here we go: '+moredata);
+    console.log('here we go: '+JSON.stringify(moredata));
+    
+    this.items = moredata;
   }
   closeModal() {
     this.view.dismiss();

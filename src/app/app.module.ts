@@ -14,7 +14,6 @@ import { AboutPage } from '../pages/about/about';
 import { EventsPage } from '../pages/events/events';
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GoogleMapComponent } from '../components/google-map/google-map';
 import firebase from 'firebase';
 
 var config = {
@@ -37,8 +36,7 @@ firebase.firestore().settings({
     SignupPage,
     FeedPage,
     AboutPage,
-    EventsPage,
-    GoogleMapComponent
+    EventsPage
   ],
   imports: [
     BrowserModule,
