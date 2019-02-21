@@ -54,13 +54,13 @@
       <ion-col>
         <button ion-button block icon-left clear small color="danger" class="border-right" (click)="like(post)">
           <ion-icon name="thumbs-up"></ion-icon>
-          <small>12 likes</small>
+          <small>{{post.data().likesCount || 0}} likes</small>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left clear small color="danger" class="border-right">
+        <button ion-button block icon-left clear small color="danger" class="border-right" (click)="comment(post)">
           <ion-icon name="text"></ion-icon>
-          <small>12 comments</small>
+          <small>{{post.data().commentsCount || 0}} comments</small>
         </button>
       </ion-col>
       <ion-col>
