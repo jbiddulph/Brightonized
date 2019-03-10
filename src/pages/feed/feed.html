@@ -40,37 +40,42 @@
   <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let post of posts" col-6 no-padding>
+      <ion-card>
+        <ion-item-divider color="danger">
+          {{post.data().owner_name}} says
+        </ion-item-divider>
+        <ion-item text-wrap>
+          {{post.data().text}}
+        </ion-item>
 
-  <ion-card *ngFor="let post of posts">
-    <ion-item-divider color="danger">
-      {{post.data().owner_name}} says
-    </ion-item-divider>
-    <ion-item text-wrap>
-      {{post.data().text}}
-    </ion-item>
-
-    <img [src]="post.data().image" alt="" *ngIf="post.data().image" (click)="openModal(post)">
-    <ion-row class="bottom-bar">
-      <ion-col>
-        <button ion-button block icon-left clear small color="danger" class="border-right" (click)="like(post)">
-          <ion-icon name="thumbs-up"></ion-icon>
-          <small>{{post.data().likesCount || 0}} likes</small>
-        </button>
+        <img [src]="post.data().image" alt="" *ngIf="post.data().image" (click)="openModal(post)">
+        <ion-row class="bottom-bar">
+          <ion-col>
+            <button ion-button block icon-left clear small color="danger" class="border-right" (click)="like(post)">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <small>{{post.data().likesCount || 0}} likes</small>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block icon-left clear small color="danger" class="border-right" (click)="comment(post)">
+              <ion-icon name="text"></ion-icon>
+              <small>{{post.data().commentsCount || 0}} comments</small>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block icon-left clear small color="danger">
+              <small>{{ ago(post.data().created.toDate()) }} ago</small>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
       </ion-col>
-      <ion-col>
-        <button ion-button block icon-left clear small color="danger" class="border-right" (click)="comment(post)">
-          <ion-icon name="text"></ion-icon>
-          <small>{{post.data().commentsCount || 0}} comments</small>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button block icon-left clear small color="danger">
-          <small>{{ ago(post.data().created.toDate()) }} ago</small>
-        </button>
-      </ion-col>
+      <ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </ion-row>
-  </ion-card>
-  <ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-grid>
 </ion-content>

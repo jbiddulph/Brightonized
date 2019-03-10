@@ -7,6 +7,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { HttpClient } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { CommentsPage } from '../comments/comments';
+import { MapPage } from '../map/map';
+import { Firebase } from '@ionic-native/firebase';
+
 
 @Component({
   selector: 'page-feed',
@@ -35,9 +39,31 @@ export class FeedPage {
     private http: HttpClient,
     private modal: ModalController,
     private actionSheetCtrl: ActionSheetController,
-    private alertCtrl: AlertController ) {
+    private alertCtrl: AlertController,
+    private firebaseCordova: Firebase) {
     this.getPosts()
+    this.firebaseCordova.getToken().then((token) => {
+      console.log('this is the token', token);
+      this.updateToken(token, firebase.auth().currentUser.uid);
+    }).
+    catch((err) => {
+      console.log(err);
+    })
   }
+
+  updateToken(token: string, uid: string) {
+    firebase.firestore().collection("users").doc(uid).set({
+      token: token,
+      tokenUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    }, {
+      merge: true
+    }).then(() => {
+      console.log("Token saved to cloud firestore")
+    }).catch((err) => {
+      console.log('this is the error: ',err);
+    })
+  }
+
   getPosts() {
     this.posts = []
     let loading = this.loadingCtrl.create({
@@ -274,21 +300,9 @@ export class FeedPage {
   }
 
   openModal(post) {
-    var docRef = firebase.firestore().collection("posts").doc(post.id)
-    docRef.get().then((doc) => {
-      if (doc.exists) {
-          console.log("Document data:", doc.data())
-          const myData = doc.data()
-          console.log("My data:", myData)
-          this.coords = [ myData ]
-          const mapModal = this.modal.create('MapPage', { data: this.coords });
-          mapModal.present();
-      } else {
-          console.log("No such document!");
-      }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });      
+    this.modal.create(MapPage, {
+      "thepost": post
+    }).present();
   }
 
   comment(post) {
@@ -297,7 +311,9 @@ export class FeedPage {
         {
           text: "View All Comments",
           handler: () => {
-            //TODO
+            this.modal.create(CommentsPage, {
+              "post": post
+            }).present();
           }
         },
         {

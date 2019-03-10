@@ -1,3 +1,20 @@
 page-events {
 
 }
+.eventslist {
+    background-color: #666666;
+}
+.eventimage-block {
+    position: relative;
+    h2 {
+        position: absolute;
+        top:20px;
+        left:0px;
+        color: #ffffff;
+        background-color: #7600c5;
+        opacity: 0.8;
+        padding: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,88 @@
+<ion-header>
+
+  <ion-navbar color="pubs">
+    <ion-title>Add Venue</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="close()" item-right>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <!-- <ion-item>
+      <ion-label>Todo</ion-label>
+      <ion-input type="text"  name="title"></ion-input>
+    </ion-item> -->
+    <button ion-button icon-only color="pubs" clear (click)="addPhoto()">
+      <ion-icon name="images"></ion-icon>
+    </button>
+    <button ion-button icon-only color="pubs" clear (click)="addPhotoFromCam()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+    <ion-row margin class="rowStyle" *ngIf="image">
+      <ion-card class="round-corners">
+        <img [src]="image" class="round-corners" alt="">
+      </ion-card>
+    </ion-row>
+    
+    <ion-item>
+      <ion-label>Venue Name</ion-label>
+      <ion-input type="text" name="pubname" placeholder="Venue name" [(ngModel)]="pubname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Address</ion-label>
+      <ion-input type="text" name="pubaddress" placeholder="Address" [(ngModel)]="pubaddress"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Town</ion-label>
+      <ion-input type="text" name="pubtown" placeholder="Town" [(ngModel)]="pubtown"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>County</ion-label>
+      <ion-input type="text" name="pubcounty" placeholder="County" [(ngModel)]="pubcounty"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Postcode</ion-label>
+      <ion-input type="text" name="pubpostcode" placeholder="Postcode" [(ngModel)]="pubpostcode"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Telephone</ion-label>
+      <ion-input type="text" name="pubtel" placeholder="Telephone" [(ngModel)]="pubtel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Website</ion-label>
+      <ion-input type="text" name="pubweb" placeholder="Website" [(ngModel)]="pubweb"></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Kind of venue</ion-label>
+        <ion-select [(ngModel)]="pubkind" name="pubkind" multiple="true" cancelText="Cancel" okText="Done">
+          <ion-option value="dog">Dog Friendly</ion-option>
+          <ion-option value="sports">Sports</ion-option>
+          <ion-option value="garden">Beer garden</ion-option>
+          <ion-option value="real ale">Real Ale Available</ion-option>
+          <ion-option value="family">Family Friendly</ion-option>
+          <ion-option value="function">Function Room</ion-option>
+          <ion-option value="live music">Live Music</ion-option>
+          <ion-option value="pool table">Pool Table</ion-option>
+          <ion-option value="dartboard">Dart Board</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    
+    <button ion-button color="pubs" (click)="post()">
+        <ion-icon slot="start" name="beer"> </ion-icon>
+         Add Venue
+    </button>
+</ion-content>

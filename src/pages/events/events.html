@@ -1,6 +1,6 @@
 <ion-header>
 
-    <ion-navbar color="danger">
+    <ion-navbar color="eventslist">
       <ion-buttons start>
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
@@ -15,8 +15,58 @@
     </ion-navbar>
     
   </ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+  
+  
+  <ion-content class="eventslist">
+    <ion-row margin class="rowStyle">
+      <button *ngIf="isAdmin" ion-button icon-only color="semi-light" clear (click)="addPub()">
+        <ion-icon name="beer"></ion-icon>
+      </button>
+      <button *ngIf="isAdmin" ion-button icon-only color="semi-light" clear (click)="addEvent()">
+        <ion-icon name="calendar"></ion-icon>
+      </button> 
+    </ion-row>
+  
+    <ion-row margin class="rowStyle" *ngIf="image">
+      <ion-card class="round-corners">
+        <img [src]="image" class="round-corners" alt="">
+      </ion-card>
+    </ion-row>
+  
+    <ion-refresher (ionRefresh)="refresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  
+    <ion-card *ngFor="let event of events">
+      <ion-item-divider color="eventslist">
+        On: {{event.data().date}} <small>at: {{event.data().time}}</small>
+      </ion-item-divider>
+      <div class="eventimage-block">
+        <h2>{{event.data().text}}</h2>
+        <img [src]="event.data().image" class="eventimage" alt="" *ngIf="event.data().image" (click)="openModal(post.id)">
+      </div>
+      <ion-row class="bottom-bar">
+        <ion-col>
+          <button ion-button block icon-left clear small color="eventslist" class="border-right" (click)="like(post)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <small>{{event.data().likesCount || 0}} likes</small>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block icon-left clear small color="eventslist" class="border-right" (click)="comment(post)">
+            <ion-icon name="text"></ion-icon>
+            <small>{{event.data().commentsCount || 0}} comments</small>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block icon-left clear small color="eventslist">
+            <small>{{ ago(event.data().created.toDate()) }} ago</small>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+  

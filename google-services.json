@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "48609054717",
+    "firebase_url": "https://quotes-cc05d.firebaseio.com",
+    "project_id": "quotes-cc05d",
+    "storage_bucket": "quotes-cc05d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48609054717:android:e3e5fd3978b9716c",
+        "android_client_info": {
+          "package_name": "com.biddulph.worthing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48609054717-bm76ln1nrd02kduhn9s6o2e4v48l8vbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz2UbgxvHimP4VwU_GYDcwB0HigijjmPM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

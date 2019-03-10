@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar color="blackblack">
+    <ion-title>Add Event</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="close()" item-right>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <!-- <ion-item>
+      <ion-label>Todo</ion-label>
+      <ion-input type="text"  name="title"></ion-input>
+    </ion-item> -->
+    <button ion-button icon-only color="events" clear (click)="addPhoto()">
+      <ion-icon name="images"></ion-icon>
+    </button>
+    <button ion-button icon-only color="events" clear (click)="addPhotoFromCam()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime display-format="DD MMMM, YYYY" [(ngModel)]="date" name="date" min="2019" max="2029-12-31"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time</ion-label>
+      <ion-datetime displayFormat="h:mm A" minuteValues="0,5,10,15,20,25,30,35,40,45,50,55" [(ngModel)]="time" name="time"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Event</ion-label>
+      <ion-input type="text" name="text" placeholder="Event Title" [(ngModel)]="text"></ion-input>
+    </ion-item>
+    <ion-row margin class="rowStyle" *ngIf="image">
+      <ion-card class="round-corners">
+        <img [src]="image" class="round-corners" alt="">
+      </ion-card>
+    </ion-row>
+    
+    <button ion-button icon-only color="grassgreen" clear (click)="post()">
+      <ion-icon name="send"></ion-icon>
+    </button>
+</ion-content>

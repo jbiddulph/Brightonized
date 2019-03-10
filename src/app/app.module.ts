@@ -12,8 +12,13 @@ import { SignupPage } from '../pages/signup/signup';
 import { FeedPage } from '../pages/feed/feed';
 import { AboutPage } from '../pages/about/about';
 import { EventsPage } from '../pages/events/events';
+import { MapPage } from '../pages/map/map';
+import { CommentsPage } from '../pages/comments/comments';
+import { AddpubPage } from '../pages/addpub/addpub';
+import { AddeventPage } from '../pages/addevent/addevent';
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Firebase } from '@ionic-native/firebase';
 import firebase from 'firebase';
 
 var config = {
@@ -36,7 +41,11 @@ firebase.firestore().settings({
     SignupPage,
     FeedPage,
     AboutPage,
-    EventsPage
+    EventsPage,
+    MapPage,
+    CommentsPage,
+    AddpubPage,
+    AddeventPage
   ],
   imports: [
     BrowserModule,
@@ -50,13 +59,18 @@ firebase.firestore().settings({
     SignupPage,
     FeedPage,
     AboutPage,
-    EventsPage
+    EventsPage,
+    MapPage,
+    CommentsPage,
+    AddpubPage,
+    AddeventPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
     Geolocation,
+    Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
