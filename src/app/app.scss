@@ -14,3 +14,28 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@media only screen
+and (min-width : 1224px) {
+/* Styles */
+    page-login .rowStyle {
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .loginbutton {
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .signup {
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.logo {
+    font-size: 25vh;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}

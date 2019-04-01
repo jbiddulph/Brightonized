@@ -11,6 +11,8 @@ import { CommentsPage } from '../comments/comments';
 import { AddpubPage } from '../addpub/addpub';
 import { AddeventPage } from '../addevent/addevent';
 import { MapPage } from '../map/map';
+// import * as _ from 'lodash';
+
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html',
@@ -28,6 +30,8 @@ export class EventsPage {
   myData: any = {};
   coords: any = {};
   userName: string;
+  pubs: any[] = [];
+  filteredPubs: any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private toastCtrl: ToastController, 
@@ -43,6 +47,7 @@ export class EventsPage {
       if(this.userName == "letmein@gmail.com"){
         this.isAdmin = true;
       }
+      this.getPubs()
   }
 
   getEvents() {
@@ -112,6 +117,31 @@ export class EventsPage {
       console.log(err)
     })
   }
+
+  getPubs() {
+    this.pubs = []
+    let loading = this.loadingCtrl.create({
+      content: "Loading Pubs..."
+    })
+    loading.present()
+    let query = firebase.firestore().collection("pubs").orderBy("created", "desc")
+
+    query.get()
+    .then((docs) => {
+
+      docs.forEach((doc) => {
+        this.pubs.push(doc)
+        
+      })
+      loading.dismiss()
+        
+      this.cursor = this.pubs[this.pubs.length -1];
+      
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
   loadMorePosts(event) {
     firebase.firestore().collection("events").orderBy("created", "desc").startAfter(this.cursor).limit(this.pageSize).get()
     .then((docs) => {

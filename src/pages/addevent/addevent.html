@@ -31,6 +31,21 @@
       <ion-label>Time</ion-label>
       <ion-datetime displayFormat="h:mm A" minuteValues="0,5,10,15,20,25,30,35,40,45,50,55" [(ngModel)]="time" name="time"></ion-datetime>
     </ion-item>
+
+    <ion-list>
+         
+        <ion-item>
+          <ion-label>Kind of venue</ion-label>
+          <ion-select [(ngModel)]="pubkind" name="pubkind" cancelText="Cancel" okText="Done">
+              
+                <ion-option *ngFor="let pub of pubs" col-12 no-padding value="{{pub.data().pubname}}">{{pub.data().pubname}}</ion-option>
+  
+          </ion-select>
+      </ion-item>
+      
+    </ion-list>
+      
+      
     <ion-item>
       <ion-label>Event</ion-label>
       <ion-input type="text" name="text" placeholder="Event Title" [(ngModel)]="text"></ion-input>

@@ -15,6 +15,9 @@ export class AddeventPage {
   date: string = "";
   time: string = "";
   image: string;
+  pubs: any[] = [];
+  pageSize: number = 10;
+  cursor: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private loadingCtrl: LoadingController,
     private camera: Camera,
@@ -22,12 +25,35 @@ export class AddeventPage {
     private toastCtrl: ToastController,
     private viewCtrl: ViewController,
     private http: HttpClient) {
+      this.getPubs()
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddeventPage');
   }
+  getPubs() {
+    this.pubs = []
+    let loading = this.loadingCtrl.create({
+      content: "Loading Pubs..."
+    })
+    loading.present()
+    let query = firebase.firestore().collection("pubs").orderBy("created", "desc")
 
+    query.get()
+    .then((docs) => {
+
+      docs.forEach((doc) => {
+        this.pubs.push(doc)
+        
+      })
+      loading.dismiss()
+        
+      // this.cursor = this.pubs[this.pubs.length -1];
+      
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
   post() {
     firebase.firestore().collection("events").add({
       text: this.text,
