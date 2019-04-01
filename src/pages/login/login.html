@@ -1,5 +1,5 @@
 <ion-header hidden>
-  <ion-navbar color="danger">
+  <ion-navbar color="brightonized">
     <ion-title>
       Login
     </ion-title>
@@ -8,23 +8,24 @@
 
 <ion-content padding>
   <ion-item text-center no-lines>
-    <ion-icon name="contacts" class="logo" color="light"></ion-icon>
+    <!-- <ion-icon name="contacts" class="logo" color="light"></ion-icon> -->
+    <div class="logo">Brightonized</div>
   </ion-item>
   <ion-item text-center no-lines>
-    <h1>Feely</h1>
-    <h6>An app for continuous feed</h6>
+    <h1>Gigs and Events</h1>
+    <h6>Nightlife in and around Brighton</h6>
   </ion-item>
 
   <ion-grid width="75%">
     <ion-row class="rowStyle">
-      <ion-icon name="mail" color="danger"></ion-icon>
+      <ion-icon name="mail" color="brightonized"></ion-icon>
       <ion-input type="email" [(ngModel)]="email" placeholder="email">Email</ion-input>
     </ion-row>
     <ion-row class="rowStyle">
-      <ion-icon name="key" color="danger"></ion-icon>
+      <ion-icon name="key" color="brightonized"></ion-icon>
       <ion-input type="password" [(ngModel)]="password" placeholder="password">Your Password</ion-input>
     </ion-row>
-    <ion-row>
+    <ion-row class="loginbutton">
       <button ion-button block round outline color="light" (click)="login()" style="margin-top:20px;">Login</button>
     </ion-row>
   </ion-grid>

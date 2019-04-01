@@ -1,16 +1,30 @@
 page-login {
     ion-content {
         .scroll-content {
-            background-color: map-get($colors , danger)
+            // background-color: map-get($colors , warning)
+            background-color: rgba(0,0,0,0.3)!important;
         }
+        background-image: url('../../assets/imgs/venuehiregallery3.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        
     }
     .item {
-        background-color: map-get($colors , danger)
+        // background-color: map-get($colors , danger)
+        background-color: rgba(0,0,0,0.0);
     }
     .logo{
         font-size:25vh;
-        margin-top:50px;
-        margin-bottom:30px;
+        margin-top:20px;
+        margin-bottom:0px;
+        height:240px;
+        background-image: url('../../assets/imgs/brightonized.png');
+        background-size: 240px 240px;
+        background-repeat: no-repeat;
+        margin-left:auto;
+        margin-right:auto;
+        background-position: center;
+        text-indent: -4000px;
     }
     h1,h6 {
         color:#ffffff;

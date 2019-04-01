@@ -1,29 +1,32 @@
 <ion-header>
-  <ion-navbar color="danger">
+  <ion-navbar color="brightonized">
+    
+      <ion-title>SIGN UP</ion-title>
     
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-item text-center no-lines>
-    <ion-icon name="logo-rss" class="logo" color="light"></ion-icon>
+    <!-- <ion-icon name="logo-rss" class="logo" color="light"></ion-icon> -->
+    <div class="logo">Brightonized</div>
   </ion-item>
   <ion-item text-center no-lines>
-    <h1>Feely</h1>
-    <h6>An app for continuous feed</h6>
+    <h1>Gigs and Events</h1>
+    <h6>Nightlife in and around Brighton</h6>
   </ion-item>
 
-  <ion-grid width="75%">
+  <ion-grid width="75%" class="signup">
     <ion-row class="rowStyle">
-      <ion-icon name="person" color="danger"></ion-icon>
+      <ion-icon name="person" color="brightonized"></ion-icon>
       <ion-input type="text" [(ngModel)]="name" placeholder="your name">Name</ion-input>
     </ion-row>
     <ion-row class="rowStyle">
-      <ion-icon name="mail" color="danger"></ion-icon>
+      <ion-icon name="mail" color="brightonized"></ion-icon>
       <ion-input type="email" [(ngModel)]="email" placeholder="email">Email</ion-input>
     </ion-row>
     <ion-row class="rowStyle">
-      <ion-icon name="key" color="danger"></ion-icon>
+      <ion-icon name="key" color="brightonized"></ion-icon>
       <ion-input type="password" [(ngModel)]="password" placeholder="password">Your Password</ion-input>
     </ion-row>
     <ion-row>
