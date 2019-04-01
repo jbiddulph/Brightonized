@@ -1,1 +1,1 @@
-# pubs-feedy
+# Brightonized
