@@ -11,15 +11,15 @@ import { CommentsPage } from '../comments/comments';
 import { AddpubPage } from '../addpub/addpub';
 import { AddeventPage } from '../addevent/addevent';
 import { MapPage } from '../map/map';
-import * as _ from 'lodash';
+// import * as _ from 'lodash';
 
 @Component({
-  selector: 'page-events',
-  templateUrl: 'events.html',
+  selector: 'page-venues',
+  templateUrl: 'venues.html',
 })
-export class EventsPage {
+export class VenuesPage {
   text: string = "";
-  events: any[] = [];
+  venues: any[] = [];
   pageSize: number = 10;
   cursor: any;
   infiniteEvent: any;
@@ -31,9 +31,7 @@ export class EventsPage {
   coords: any = {};
   userName: string;
   pubs: any[] = [];
-  pubz: any;
   filteredPubs: any;
-  venue: string = "";
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private toastCtrl: ToastController, 
@@ -44,7 +42,7 @@ export class EventsPage {
     private modal: ModalController,
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController) {
-      this.getEvents()
+      this.getVenues()
       this.userName =  firebase.auth().currentUser.email;
       if(this.userName == "letmein@gmail.com"){
         this.isAdmin = true;
@@ -52,34 +50,17 @@ export class EventsPage {
       this.getPubs()
   }
 
-  /// Active filter rules
-  // filters = {}
-
-
-  // private applyFilters() {
-  //   this.filteredPubs = _.filter(this.pubs, _.conforms(this.filters) )
-  // }
-
-  // /// filter property by equality to rule
-  // filterExact(property: string, rule: any) {
-  //   console.log('Selected', rule)
-  //   this.filters[property] = val => val == rule
-  //   this.applyFilters()
-  // }
-
-  getEvents() {
-    this.events = []
+  getVenues() {
+    this.venues = []
     let loading = this.loadingCtrl.create({
       content: "Loading Feed..."
     })
     loading.present()
-    let query = firebase.firestore().collection("events").orderBy("created", "desc").limit(this.pageSize)
+    let query = firebase.firestore().collection("pubs").orderBy("created", "desc").limit(this.pageSize)
     
     
     query.onSnapshot((snapshot) => {
       let changedDocs = snapshot.docChanges();
-      // this.pubs = changedDocs;
-      // this.applyFilters();
 
       changedDocs.forEach((change) => {
         if(change.type == "added"){
@@ -87,9 +68,9 @@ export class EventsPage {
         }
         if(change.type == "modified"){
           //TODO
-          for(let i = 0; i < this.events.length; i++){
-            if(this.events[i].id == change.doc.id){
-              this.events[i] = change.doc;
+          for(let i = 0; i < this.venues.length; i++){
+            if(this.venues[i].id == change.doc.id){
+              this.venues[i] = change.doc;
             }
           }
         }
@@ -101,22 +82,21 @@ export class EventsPage {
 
     query.get()
     .then((docs) => {
-      
+
       docs.forEach((doc) => {
-        this.events.push(doc)
+        this.venues.push(doc)
         
       })
-      
       loading.dismiss()
         
-      this.cursor = this.events[this.events.length -1];
+      this.cursor = this.venues[this.venues.length -1];
       
     }).catch((err) => {
       console.log(err)
     })
   }
   post() {
-    firebase.firestore().collection("events").add({
+    firebase.firestore().collection("pubs").add({
       text: this.text,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       owner: firebase.auth().currentUser.uid,
@@ -132,7 +112,7 @@ export class EventsPage {
         message: "Your post has been created successfully.",
         duration: 3000
       }).present();
-      this.getEvents()
+      this.getVenues()
     }).catch((err) => {
       console.log(err)
     })
@@ -163,17 +143,17 @@ export class EventsPage {
   }
 
   loadMorePosts(event) {
-    firebase.firestore().collection("events").orderBy("created", "desc").startAfter(this.cursor).limit(this.pageSize).get()
+    firebase.firestore().collection("pubs").orderBy("created", "desc").startAfter(this.cursor).limit(this.pageSize).get()
     .then((docs) => {
       docs.forEach((doc) => {
-        this.events.push(doc)
+        this.venues.push(doc)
       })
       if(docs.size < this.pageSize){
         event.enable(false);
         this.infiniteEvent = event;
       } else {
         event.complete();
-        this.cursor = this.events[this.events.length -1];
+        this.cursor = this.venues[this.venues.length -1];
       }
       
     }).catch((err) => {
@@ -182,9 +162,9 @@ export class EventsPage {
   }
 
   refresh(event){
-    this.events = [];
+    this.venues = [];
 
-    this.getEvents();
+    this.getVenues();
     if(this.infiniteEvent){
       this.infiniteEvent.enable(true);
     }

@@ -14,6 +14,9 @@ export class AddeventPage {
   text: string = "";
   date: string = "";
   time: string = "";
+  venue: string = "";
+  link: string = "";
+  info: string = "";
   image: string;
   pubs: any[] = [];
   pageSize: number = 10;
@@ -59,6 +62,9 @@ export class AddeventPage {
       text: this.text,
       date: this.date,
       time: this.time,
+      venue: this.venue,
+      link: this.link,
+      info: this.info,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       owner: firebase.auth().currentUser.uid,
       owner_name: firebase.auth().currentUser.displayName
@@ -143,18 +149,18 @@ export class AddeventPage {
         console.log(error)
       }, () => {
         console.log("upload complete")
-        this.geolocation.getCurrentPosition().then((resp) => {
+        // this.geolocation.getCurrentPosition().then((resp) => {
           
-          resp.coords.latitude
-          resp.coords.longitude
-          console.log(resp.coords.latitude)
-          firebase.firestore().collection("events").doc(name).update({
-            latitude: resp.coords.latitude,
-            longitude: resp.coords.longitude
-          })
-         }).catch((error) => {
-           console.log('Error getting location', error);
-         });
+        //   resp.coords.latitude
+        //   resp.coords.longitude
+        //   console.log(resp.coords.latitude)
+        //   firebase.firestore().collection("events").doc(name).update({
+        //     latitude: resp.coords.latitude,
+        //     longitude: resp.coords.longitude
+        //   })
+        //  }).catch((error) => {
+        //    console.log('Error getting location', error);
+        //  });
         uploadTask.snapshot.ref.getDownloadURL().then((url) => {
           
           firebase.firestore().collection("events").doc(name).update({

@@ -12,6 +12,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { FeedPage } from '../pages/feed/feed';
 import { AboutPage } from '../pages/about/about';
 import { EventsPage } from '../pages/events/events';
+import { VenuesPage } from '../pages/venues/venues';
 import { MapPage } from '../pages/map/map';
 import { CommentsPage } from '../pages/comments/comments';
 import { AddpubPage } from '../pages/addpub/addpub';
@@ -42,6 +43,7 @@ firebase.firestore().settings({
     FeedPage,
     AboutPage,
     EventsPage,
+    VenuesPage,
     MapPage,
     CommentsPage,
     AddpubPage,
@@ -60,6 +62,7 @@ firebase.firestore().settings({
     FeedPage,
     AboutPage,
     EventsPage,
+    VenuesPage,
     MapPage,
     CommentsPage,
     AddpubPage,

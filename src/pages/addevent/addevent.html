@@ -35,8 +35,8 @@
     <ion-list>
          
         <ion-item>
-          <ion-label>Kind of venue</ion-label>
-          <ion-select [(ngModel)]="pubkind" name="pubkind" cancelText="Cancel" okText="Done">
+          <ion-label>Venue</ion-label>
+          <ion-select [(ngModel)]="venue" name="venue" cancelText="Cancel" okText="Done">
               
                 <ion-option *ngFor="let pub of pubs" col-12 no-padding value="{{pub.data().pubname}}">{{pub.data().pubname}}</ion-option>
   
@@ -49,6 +49,14 @@
     <ion-item>
       <ion-label>Event</ion-label>
       <ion-input type="text" name="text" placeholder="Event Title" [(ngModel)]="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Link to buy tickets</ion-label>
+      <ion-input type="text" name="link" placeholder="Event Link" [(ngModel)]="link"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Link to more info</ion-label>
+      <ion-input type="text" name="info" placeholder="Event Info" [(ngModel)]="info"></ion-input>
     </ion-item>
     <ion-row margin class="rowStyle" *ngIf="image">
       <ion-card class="round-corners">
