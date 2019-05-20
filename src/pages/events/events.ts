@@ -53,8 +53,16 @@ export class EventsPage {
   }
 
   /// Active filter rules
-  // filters = {}
+  filters = {}
 
+  // ngOnInit() {
+  //   firebase.firestore().collection("pubs")
+
+  //     .onSnapshot(function(pubs) {
+  //       this.pubs = pubs;
+  //       this.applyFilters()
+  //   })
+  // }
 
   // private applyFilters() {
   //   this.filteredPubs = _.filter(this.pubs, _.conforms(this.filters) )
